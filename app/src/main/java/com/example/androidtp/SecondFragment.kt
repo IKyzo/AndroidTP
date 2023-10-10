@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.androidtp.databinding.FragmentSecondBinding
+import androidx.navigation.fragment.navArgs
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -28,6 +29,19 @@ class SecondFragment : Fragment() {
         return binding.root
 
     }
+
+
+    val args: SecondFragmentArgs by navArgs()
+    val countText = getString(R.string.random_heading, args.myArg)
+    binding.textviewHeader.text = countText
+    val random = java.util.Random()
+    var randomNumber = 0
+    if (args.myArg > 0) {
+        randomNumber = random.nextInt(args.myArg + 1)
+    }
+    binding.textviewRandom.text = randomNumber.toString()
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

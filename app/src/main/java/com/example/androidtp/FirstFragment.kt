@@ -14,22 +14,42 @@ import com.example.androidtp.databinding.FragmentFirstBinding
  */
 class FirstFragment : Fragment() {
 
+
     private var _binding: FragmentFirstBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private fun countMe() {
+        val num = binding.textviewFirst.text.toString()
+        val count = num.toInt() + 1
+        binding.textviewFirst.text = count.toString()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-            binding.toastButton.setOnClickListener {
+
+        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        binding.toastButton.setOnClickListener {
                 val myToast = Toast.makeText(context, "hello toast", Toast.LENGTH_SHORT)
                 myToast.show()
-            }
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        }
+
+        binding.randomButton.setOnClickListener {
+            val txt = binding.textviewFirst.text
+            val nb = txt.toString().toInt()
+            val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(nb)
+            findNavController().navigate(action)
+        }
+
+        binding.countButton.setOnClickListener {
+            countMe()
+        }
+
+
         return binding.root
 
     }
