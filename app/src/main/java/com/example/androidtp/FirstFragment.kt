@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.androidtp.databinding.FragmentFirstBinding
 
@@ -24,6 +25,10 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+            binding.toastButton.setOnClickListener {
+                val myToast = Toast.makeText(context, "hello toast", Toast.LENGTH_SHORT)
+                myToast.show()
+            }
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
 
